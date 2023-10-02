@@ -1,24 +1,55 @@
 #include <stdio.h>
 
 int main() {
-    int i,j,m,cnt=0;
-    int a[]={1,4,32,16,3,8,19,22,135,7,234,56,36,75,67,64,85,23,67,3,4,65,37,563,43,90};
-    int len=sizeof(a)/sizeof(a[0]);
-    for(i=0;i<len-1;i++){
-        for(j=i+1;j>0;j--){
-            if(a[j]<a[j-1]){
-                m=a[j];
-                a[j]=a[j-1];
-                a[j-1]=m;
-                cnt+=3;
-            }else{
-                cnt++;
-                continue;
+    int i,x,cnt,num=0;
+    int a[100];
+    for(i=2;i<=100;i++){
+        cnt=0;
+        for(x=2;x<=i;x++){
+            cnt++;
+            if(i%x==0){
+                break;
             }
         }
+        if(cnt==i-1) {
+            printf("%d\n", i);
+            num++;
+            a[num-1]=i;
+        }
+        else
+            continue;
     }
-    for(i=0;i<len;i++)
-        printf("%d ",a[i]);
-printf("次数=%d",cnt);
+    printf("num=%d\n",num);
+    int t,k,j,m,n,CNT=0;
+    for(t=6;t<=100;t++){
+       // printf("%d->%d\n",t,CNT);
+        for(i=0;i<num;i++){
+            if(a[i]<t){
+                k=t-a[i];
+                for(j=0;j<num;j++){
+                    m=k-a[j];
+                    for(n=0;n<num;n++){
+                        if(a[n]==m){
+                            CNT++;
+                            goto end;
+                        }else{
+                            continue;
+                        }
+
+                    }
+
+                }
+            }
+            else{
+                break;
+            }
+        }
+        end:continue;
+    }
+printf("CNT=%d\n",CNT);
+    if(CNT==95){
+        printf("right");
+    }
+
     return 0;
 }
